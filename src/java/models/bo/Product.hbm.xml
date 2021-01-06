@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 13, 2020 10:12:35 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="models.bo.Product" table="product" catalog="ecom" optimistic-lock="version">
+        <id name="productId" type="java.lang.Integer">
+            <column name="productId" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="category" class="models.bo.Category" fetch="select">
+            <column name="category_id" not-null="true" />
+        </many-to-one>
+        <property name="productName" type="string">
+            <column name="productName" length="65535" not-null="true" />
+        </property>
+        <property name="quantity" type="int">
+            <column name="quantity" not-null="true" />
+        </property>
+        <property name="price" type="double">
+            <column name="price" precision="22" scale="0" not-null="true" />
+        </property>
+        <set name="purchases" table="purchase" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="productId" not-null="true" />
+            </key>
+            <one-to-many class="models.bo.Purchase" />
+        </set>
+    </class>
+</hibernate-mapping>

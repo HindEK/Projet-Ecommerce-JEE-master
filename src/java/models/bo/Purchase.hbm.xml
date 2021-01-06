@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 13, 2020 10:12:35 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="models.bo.Purchase" table="purchase" catalog="ecom" optimistic-lock="version">
+        <id name="purchaseId" type="java.lang.Integer">
+            <column name="purchaseId" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="bill" class="models.bo.Bill" fetch="select">
+            <column name="billId" not-null="true" />
+        </many-to-one>
+        <many-to-one name="product" class="models.bo.Product" fetch="select">
+            <column name="productId" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

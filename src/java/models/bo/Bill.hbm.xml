@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 13, 2020 10:12:35 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="models.bo.Bill" table="bill" catalog="ecom" optimistic-lock="version">
+        <id name="billId" type="java.lang.Integer">
+            <column name="billId" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="customer" class="models.bo.Customer" fetch="select">
+            <column name="customer_id" not-null="true" />
+        </many-to-one>
+        <property name="date" type="date">
+            <column name="date" length="10" not-null="true" />
+        </property>
+        <set name="purchases" table="purchase" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="billId" not-null="true" />
+            </key>
+            <one-to-many class="models.bo.Purchase" />
+        </set>
+    </class>
+</hibernate-mapping>

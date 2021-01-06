@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 13, 2020 10:12:35 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="models.bo.Customer" table="customer" catalog="ecom" optimistic-lock="version">
+        <id name="customerId" type="java.lang.Integer">
+            <column name="customer_id" />
+            <generator class="identity" />
+        </id>
+        <property name="firstName" type="string">
+            <column name="firstName" length="65535" not-null="true" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="lastName" length="65535" not-null="true" />
+        </property>
+        <property name="login" type="string">
+            <column name="login" length="65535" not-null="true" unique="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="65535" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="65535" not-null="true" unique="true" />
+        </property>
+        <property name="address" type="string">
+            <column name="address" length="65535" not-null="true" />
+        </property>
+        <property name="phoneNumber" type="string">
+            <column name="phoneNumber" length="65535" not-null="true" />
+        </property>
+        <set name="bills" table="bill" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="customer_id" not-null="true" />
+            </key>
+            <one-to-many class="models.bo.Bill" />
+        </set>
+    </class>
+</hibernate-mapping>
